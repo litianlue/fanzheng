@@ -23,7 +23,6 @@ class BApplication : MultiDexApplication(), BApplication {
         //MobSDK.init(this)
         JPushInterface.setDebugMode(true)
         JPushInterface.init(this)
-        //李田略列子
         init()
         initWx()
         register()
