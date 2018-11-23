@@ -1,0 +1,87 @@
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        buildTypes {
+            sit {
+                addBuildConfigFields(getPropeeties('sit'))
+                minifyEnabled false
+                debuggable true
+            }
+            pre {
+                addBuildConfigFields(getPropeeties('pre'))
+                zipAlignEnabled true
+                debuggable true
+            }
+            prd {
+                addBuildConfigFields(getPropeeties('prd'))
+                zipAlignEnabled true
+                //minifyEnabled true
+                debuggable false
+                //proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            }
+        }
+    }
+//    sourceSets{
+//        main{
+//            assets.srcDirs=['../../../base_lib/src/main/assets','assets']
+//        }
+//    }
+}
+
+def injectResource(String mainColor){
+    def str = new FileInputStream(file("./src/main/res/values/colors.xml")).text
+    Matcher matcher = Pattern.compile("<[\\S-\\s]+>").matcher(str)
+    matcher.find()
+    def maStr = matcher.group().replaceAll("<color name=\"main_color\">([#A-Za-z0-9]+)</color>", "<color name=\"main_color\">${mainColor.replaceAll("\"","")}</color>")
+    new FileOutputStream(file("./src/main/res/values/colors.xml")).write(maStr.getBytes())
+}
+def getPropeeties(String fileName) {
+    Map<String, com.android.builder.model.ClassField> fields = new HashMap<>()
+    Properties props = new Properties()
+    props.load(new FileInputStream(file("../etc/${fileName}.properties")))
+    for (Map.Entry<String, String> p : props.entrySet()) {
+        String pValue = p.getValue()
+        String pKey = p.getKey()
+        if(pKey == "MainColor"){
+            injectResource(pValue)
+        }
+        fields.put(pKey, new com.android.builder.internal.ClassFieldImpl("String", pKey, pValue))
+    }
+    return fields
+}
+dependencies {
+    kapt 'com.github.bumptech.glide:compiler:4.6.1'
+    api "org.jetbrains.kotlin:kotlin-stdlib-jre7:${rootProject.ext.kotlin_version}"
+    api 'com.squareup.retrofit2:retrofit:2.4.0'
+    api 'io.reactivex.rxjava2:rxkotlin:2.2.0'
+    api 'org.greenrobot:eventbus:3.1.1'
+    api "com.android.support:appcompat-v7:${rootProject.ext.support_version}"
+    api "com.android.support:recyclerview-v7:${rootProject.ext.support_version}"
+    api "com.android.support:design:${rootProject.ext.support_version}"
+    api "org.jetbrains.anko:anko:$rootProject.ext.anko_version"
+    api 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+    api 'com.github.yxping:EasyPermissionUtil:v0.1.0'
+    implementation 'top.zibin:Luban:1.1.3'
+    api 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.orhanobut:logger:2.2.0'
+    implementation 'com.github.bumptech.glide:glide:4.6.1'
+    implementation files('libs/alipaySdk-20180316.jar')
+    implementation files('libs/core-3.0.0.jar')
+    api 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:5.1.0'
+
+}
+

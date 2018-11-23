@@ -1,0 +1,60 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    defaultConfig {
+        applicationId "fanzhen.first.com.fanzhen"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+    File propFile = file('../signing.properties')
+    Properties props = new Properties()
+    props.load(new FileInputStream(propFile))
+    signingConfigs {
+        release {
+            storeFile file(props['STORE_FILE'])
+            storePassword props['STORE_PASSWORD']
+            keyAlias props['KEY_ALIAS']
+            keyPassword props['KEY_PASSWORD']
+        }
+    }
+    buildTypes {
+        sit {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+            debuggable true
+        }
+        pre {
+            signingConfig signingConfigs.release
+            zipAlignEnabled true
+            debuggable true
+        }
+        prd {
+            signingConfig signingConfigs.release
+            zipAlignEnabled true
+            //minifyEnabled true
+            debuggable false
+            //proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':base_lib')
+    implementation 'com.bm.photoview:library:1.4.1'
+    implementation 'org.jsoup:jsoup:1.10.1'
+    implementation 'com.android.support:multidex:1.0.2'
+    implementation 'com.github.litianlue:MyPhoto:v2.2.5'
+    implementation 'com.github.Labmem003:NotificationPageHelper:1.0.1'
+
+}

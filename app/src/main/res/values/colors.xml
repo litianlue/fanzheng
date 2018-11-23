@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+    <color name="line">#dddddd</color>
+    <color name="progress">#f89797</color>
+    <color name="main_menu_bg">#f9f9f9</color>
+    <color name="transparent">#00000000</color>
+    <color name="bantouming">#10000000</color>
+    <color name="sold_out">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="c666">#666666</color>
+    <color name="blue">#4cc9c5</color>
+    <color name="c888">#888888</color>
+    <color name="cf0f">#f0f0f0</color>
+    <color name="c6969">#696969</color>
+    <color name="cf5f5">#f5f5f5</color>
+    <color name="cf7f7">#f7f7f7</color>
+    <color name="cf3f3">#f3f3f3</color>
+    <color name="c333">#333333</color>
+    <color name="c7c7c">#7c7c7c</color>
+    <color name="black">#000000</color>
+    <color name="c222">#222222</color>
+    <color name="ccc">#cccccc</color>
+    <color name="c999">#999999</color>
+    <color name="cf5">#f5f5f5</color>
+    <color name="red">#D44D57</color>
+    <color name="ff00">#ff0000</color>
+    <color name="ceb7">#eb7a7a</color>
+    <color name="ca0a">#a0a0a0</color>
+    <color name="blue5a">#5a7391</color>
+    <color name="ea7b">#ea7b7b</color>
+    <color name="ed7d">#ed7d7d</color>
+    <color name="ff8e">#ffbebe</color>
+    <color name="eb7a">#eb7a7a</color>
+    <color name="ec76">#ec7676</color>
+    <color name="ea76">#ea7676</color>
+    <color name="blue57">#57606f</color>
+    <color name="b0b8">#b0b8c5</color>
+    <color name="d825">#d82530</color>
+    <color name="da25">#da252e</color>
+    <color name="ceee">#eeeeee</color>
+    <color name="f0e6">#f0e6de</color>
+    <color name="colorhead">#f5e8d9</color>
+    <color name="fbc5">#fbc5c5</color>
+    <color name="f5132">#513216</color>
+    <color name="f1e8">#f1e8df</color>
+    <color name="ee86">#ee8686</color>
+    <color name="b6a9">#2b6a92</color>
+    <color name="b6a92">#5b6a92</color>
+    <color name="b8b8">#b8b8b8</color>
+    <color name="c8c8">#c8c8c8</color>
+    <color name="cbcb">#cbcbcb</color>
+    <color name="c2323">#232323</color>
+    <color name="d92c">#d92c37</color>
+    <color name="fefe">#fefefe</color>
+    <color name="db55">#db5555</color>
+    <color name="ff31">#ff3132</color>
+    <color name="ee9b">#ee9b9b</color>
+    <color name="d4d4d">#4d4d4d</color>
+
+    <color name="photopicker_background">#181819</color>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="180dp"
+    android:layout_height="180dp"
+    android:background="@drawable/r_fff_dialog">
+    <com.dyl.base_lib.external.LoadView
+        android:id="@+id/load_view"
+        android:layout_width="80dp"
+        android:src="@drawable/load_progress"
+        android:layout_gravity="center"
+        android:layout_height="80dp"/>
+</FrameLayout>

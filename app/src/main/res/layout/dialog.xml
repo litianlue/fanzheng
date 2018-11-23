@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="600dp"
+    android:layout_height="200dp">
+    <TextView
+        android:id="@+id/tv_dialog_context"
+        android:layout_marginTop="25dp"
+        android:layout_alignParentTop="true"
+        android:textSize="30dp"
+        android:gravity="center_horizontal"
+        android:text="检测到您没有打开通知权限，是否去打开"
+        android:textColor="@color/c333"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_alignParentLeft="true"
+
+        android:id="@+id/btn_confirm"
+        android:textSize="30dp"
+        android:text="确定"
+        android:layout_marginLeft="30dp"
+        android:layout_centerVertical="true"
+        android:textColor="@color/c333"
+        android:gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_alignParentRight="true"
+        android:id="@+id/btn_off"
+        android:textSize="30dp"
+        android:layout_marginRight="30dp"
+        android:text="取消"
+        android:layout_centerVertical="true"
+        android:textColor="@color/c333"
+        android:gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>
