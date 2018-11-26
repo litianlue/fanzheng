@@ -15,7 +15,7 @@ import java.util.Iterator;
 
 import cn.jpush.android.api.JPushInterface;
 import fanzhen.first.com.fanzhen.module.main.MainActivity;
-import fanzhen.first.com.fanzhen.module.main.MyTestActivity;
+
 
 /**
  * 自定义接收器
