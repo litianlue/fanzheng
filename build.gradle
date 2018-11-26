@@ -3,12 +3,13 @@
 buildscript {
     apply from: 'config.gradle'
     repositories {
+        google()
         jcenter()
         mavenCentral()
         maven {
             url "https://www.jitpack.io"
         }
-        google()
+
 
 
     }
