@@ -6,7 +6,7 @@ import com.ppx.kotlin.utils.inject.notifyAny
 import fanzhen.first.com.chujiayoupin.R
 import fanzhen.first.com.chujiayoupin.external.BaseActivity
 import fanzhen.first.com.chujiayoupin.module.home.HomeView
-import fanzhen.first.com.chujiayoupin.module.my.MyView
+import fanzhen.first.com.chujiayoupin.module.my.ui.MyView
 import kotlinx.android.synthetic.main.activity_main.*
 import org.greenrobot.eventbus.Subscribe
 

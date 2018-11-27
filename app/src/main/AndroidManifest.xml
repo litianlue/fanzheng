@@ -173,7 +173,7 @@
         <meta-data android:name="JPUSH_CHANNEL" android:value="developer-default"/>
         <meta-data android:name="JPUSH_APPKEY" android:value="70ef825f4ba6864ffec24d07" /> <!--  </>值来自开发者平台取得的AppKey-->
 
-
+        <activity android:name=".module.my.ui.PersonalIinfoActivity"/>
 
     </application>
 
