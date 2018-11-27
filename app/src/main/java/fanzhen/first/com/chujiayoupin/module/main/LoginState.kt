@@ -1,6 +1,8 @@
 package fanzhen.first.com.chujiayoupin.module.main
 
 import android.content.Context
+import android.content.Intent
+import android.util.Log
 import com.dyl.base_lib.base.BaseActivity
 import com.dyl.base_lib.data.cache.Cache
 import com.dyl.base_lib.data.sp.getSpData
@@ -15,6 +17,7 @@ fun Context.isLogin():Boolean{
     return hasSpData(IS_LOGIN)&&getSpData(IS_LOGIN,false)&&hasSpData(Cache.COOKIE)
 }
 inline fun <reified T : BaseActivity> Context.checkLoginStartActivity(p:Any?=null, crossinline call:()->Unit={(this as BaseActivity).startActivity<T>(p)}){
+
     if(isLogin()){
         call.invoke()
     }else{

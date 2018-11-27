@@ -1,12 +1,18 @@
 package fanzhen.first.com.chujiayoupin.module.main
 
+import android.text.method.LinkMovementMethod
+import android.util.Log
 import com.dyl.base_lib.data.sp.putSpData
+import com.dyl.base_lib.external.TextStorage
 import com.dyl.base_lib.model.CoockieData
 import com.dyl.base_lib.model.WeiXin
+import com.dyl.base_lib.wx.loginWx
 import com.first.chujiayoupin.event.net.IS_LOGIN
 import fanzhen.first.com.chujiayoupin.R
 import fanzhen.first.com.chujiayoupin.external.BaseActivity
+import kotlinx.android.synthetic.main.activity_login.*
 import org.greenrobot.eventbus.Subscribe
+import org.jetbrains.anko.sdk25.coroutines.onClick
 
 
 class LoginActivity : BaseActivity() {
@@ -18,21 +24,21 @@ class LoginActivity : BaseActivity() {
 
 
         setContentView(R.layout.activity_login)
-      /*  login.onClick {
+        login.onClick {
+            Log.w("test","isLogin====")
             loginWx()
-
         }
-        tv_hint.movementMethod = LinkMovementMethod.getInstance()
-        tv_hint.text = TextStorage().addText("点击登录按钮即表示同意", 23, "#999999").addText("《用户服务协议》", 23, click = {
-            startActivity<UserRegistActivity>()
-        }).spb
-        if(BApplication.wxApi?.isWXAppInstalled==false){
-            tv_login.text="手机登录"
-            login.onClick {
-                startActivity<LoginPhoneActivity>()
-                finish()
-            }
-        }*/
+       // tv_hint.movementMethod = LinkMovementMethod.getInstance()
+//        tv_hint.text = TextStorage().addText("点击登录按钮即表示同意", 23, "#999999").addText("《用户服务协议》", 23, click = {
+//            startActivity<UserRegistActivity>()
+//        }).spb
+//        if(BApplication.wxApi?.isWXAppInstalled==false){
+//            tv_login.text="手机登录"
+//            login.onClick {
+//                startActivity<LoginPhoneActivity>()
+//                finish()
+//            }
+//        }
 
     }
     @Subscribe

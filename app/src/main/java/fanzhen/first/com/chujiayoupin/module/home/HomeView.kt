@@ -11,9 +11,11 @@ class HomeView(context: Context) : BaseView(context) {
     override fun initData() {
     }
     override fun initView(){
+
         initContentView(R.layout.layout_home){
 
         }
+
     }
     companion object {
         var shopNo:String=""

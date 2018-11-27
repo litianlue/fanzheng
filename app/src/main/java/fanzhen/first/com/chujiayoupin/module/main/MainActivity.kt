@@ -19,7 +19,6 @@ class MainActivity : BaseActivity() {
     val myView by lazy {
         MyView(this)
     }
-
     override fun initData() {
 
     }
