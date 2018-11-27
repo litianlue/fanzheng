@@ -971,24 +971,7 @@ data class MyOrderDetails(
             val GiftId: Int = 0,
             val ActivityGroupBuyingId : Int = 0,
             val GiftPackageProduct: SGiftPackageProduct = SGiftPackageProduct()
-    ) {
-        var job: Job? = null
-        fun setSellTime(v1: TextView, str: String) {
-            job = launch(CommonPool) {
-                while (true) {
-                    launch(UI) {
-                        v1.text = TimeDateUtil.longToString(Timer * 1000, str)
-                        Timer -= 1
-                        if (Timer < 0) {
-                            job?.cancel()
-                            return@launch
-                        }
-                    }
-                    delay(1000)
-                }
-            }.apply { start() }
-        }
-    }
+    )
 
     data class SGiftPackageProduct(
             val BrandId: Int = 0,

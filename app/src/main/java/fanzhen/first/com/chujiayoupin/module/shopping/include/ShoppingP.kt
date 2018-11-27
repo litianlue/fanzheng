@@ -1,16 +1,11 @@
 package fanzhen.first.com.chujiayoupin.module.shopping.include
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import com.dyl.base_lib.base.BpAdapter
-
 import com.dyl.base_lib.base.vertical
+
 import com.dyl.base_lib.util.ToastUtil
-import com.dyl.base_lib.view.OnItemClickListener
-import com.dyl.base_lib.view.show
 import com.first.chujiayoupin.model.SCart
 import com.ppx.kotlin.utils.inject.inflate
 import fanzhen.first.com.chujiayoupin.R
@@ -51,6 +46,5 @@ fun ShoppingView.initShoppingRcy(){
 
     }.notifyDataSetChanged(listOf(SCart(),SCart(),SCart(),SCart(),SCart()))
 
-    v!!.rv_goods.setMoveX(150)
 
 }

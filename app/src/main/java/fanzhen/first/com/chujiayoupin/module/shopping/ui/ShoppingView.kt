@@ -1,13 +1,9 @@
 package fanzhen.first.com.chujiayoupin.module.shopping.ui
 
 import android.content.Context
-import android.view.View
-import android.widget.Toast
 import com.dyl.base_lib.base.BaseView
-import com.dyl.base_lib.base.toBpAdapter
 import com.dyl.base_lib.net.call
 import com.dyl.base_lib.net.load
-import com.dyl.base_lib.view.OnItemClickListener
 import com.first.chujiayoupin.model.RLogin
 import com.first.chujiayoupin.model.RShoppingCart
 import com.first.chujiayoupin.model.SCart

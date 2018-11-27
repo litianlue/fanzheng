@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.dyl.base_lib.view.ItemRemoveRecyclerView
+    <com.dyl.base_lib.external.BMPRecyclerView
         android:id="@+id/rv_goods"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
