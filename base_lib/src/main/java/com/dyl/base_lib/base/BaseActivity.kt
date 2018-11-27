@@ -1,5 +1,6 @@
 package com.dyl.base_lib.base
 
+import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Color
@@ -10,6 +11,7 @@ import android.util.TypedValue
 import android.view.*
 import android.widget.FrameLayout
 import android.widget.ImageView
+import com.bugtags.library.Bugtags
 import com.dyl.base_lib.BuildConfig
 import com.dyl.base_lib.R
 import com.dyl.base_lib.data.cache.Cache
@@ -27,12 +29,14 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
-
+import android.view.MotionEvent
+import android.view.inputmethod.InputMethodManager
+import com.dyl.base_lib.base.slide.ActionBarActivity
 
 /**
  * Created by dengyulin on 2018/4/2.
  */
-abstract class BaseActivity : SwipeActivity() {
+abstract class BaseActivity : ActionBarActivity() {
     val ISLOGIN="isLogin"
     val onKeyListener = mutableListOf<(keyCode: Int, event: KeyEvent) -> Boolean>()
     var dialog: AppCompatDialog? = null
@@ -51,7 +55,9 @@ abstract class BaseActivity : SwipeActivity() {
         initView()
         initData()
     }
-
+    fun hideKeyBord() {
+        (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(this?.currentFocus?.windowToken, InputMethodManager.HIDE_NOT_ALWAYS);
+    }
     override fun getResources(): Resources {
         val dis = super.getResources().displayMetrics
         if (dis.density != dis.widthPixels / (BuildConfig.DisplaySize.toFloatOrNull() ?: dis.density)) {
@@ -61,6 +67,7 @@ abstract class BaseActivity : SwipeActivity() {
     }
 
     open fun initWindow() {
+
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
     }
 
@@ -90,7 +97,7 @@ abstract class BaseActivity : SwipeActivity() {
             }
             textView(str) {
                 setTextSize(TypedValue.COMPLEX_UNIT_DIP, 28f)
-                textColor = Color.parseColor("#333333")
+                textColor = Color.parseColor("#ffffff")
                 gravity = Gravity.CENTER
                 layoutParams = FrameLayout.LayoutParams(dip(300), dip(80)).apply {
                     gravity = Gravity.CENTER
@@ -98,7 +105,7 @@ abstract class BaseActivity : SwipeActivity() {
             }
             textView(right) {
                 setTextSize(TypedValue.COMPLEX_UNIT_DIP, 24f)
-                textColor = Color.parseColor("#333333")
+                textColor = Color.parseColor("#ffffff")
                 setOnClickListener(call)
                 gravity = Gravity.CENTER_VERTICAL
                 layoutParams = FrameLayout.LayoutParams(wrapContent, dip(80)).apply {
@@ -168,4 +175,21 @@ abstract class BaseActivity : SwipeActivity() {
         return hasSpData(ISLOGIN)&&getSpData(ISLOGIN,false)&&hasSpData(Cache.COOKIE)&&getSpData(Cache.COOKIE,"").isNotNull()
     }
 
+    override fun onResume() {
+        super.onResume()
+        //注：回调 1
+        Bugtags.onResume(this)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        //注：回调 2
+        Bugtags.onPause(this)
+    }
+
+    override fun dispatchTouchEvent(event: MotionEvent): Boolean {
+        //注：回调 3
+        Bugtags.onDispatchTouchEvent(this, event)
+        return super.dispatchTouchEvent(event)
+    }
 }

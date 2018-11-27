@@ -36,7 +36,7 @@ class StarPicView : View {
     override fun onFinishInflate() {
         super.onFinishInflate()
         launch(CommonPool){
-            bitmap=Bitmap.createScaledBitmap(this@StarPicView.context.getBitmap(R.drawable.wjx),size,size,true)
+            bitmap=Bitmap.createScaledBitmap(this@StarPicView.context.getBitmap(R.drawable.wjx_f3),size,size,true)
             bitmapBG=Bitmap.createScaledBitmap(this@StarPicView.context.getBitmap(R.drawable.wjx_n),size,size,true)
         }
     }

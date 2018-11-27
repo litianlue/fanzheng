@@ -12,10 +12,9 @@ import com.dyl.base_lib.model.WeiXin
 import com.dyl.base_lib.net.call
 import com.dyl.base_lib.net.load
 import com.dyl.base_lib.show.toast.toast
-import com.tencent.mm.opensdk.modelmsg.SendAuth
-import com.tencent.mm.opensdk.modelmsg.SendMessageToWX
-import com.tencent.mm.opensdk.modelmsg.WXMediaMessage
-import com.tencent.mm.opensdk.modelmsg.WXWebpageObject
+import com.dyl.base_lib.util.isNotNull
+import com.dyl.base_lib.util.isNull
+import com.tencent.mm.opensdk.modelmsg.*
 import com.tencent.mm.opensdk.modelpay.PayReq
 import com.tencent.mm.opensdk.openapi.WXAPIFactory
 import java.io.ByteArrayOutputStream
@@ -26,10 +25,23 @@ fun Application.initWx() {
     BApplication.wxApi?.registerApp(BuildConfig.WXCODE)
 }
 
-fun Context.shareWXSceneSession(url: String, title: String, desc: String, id: Int = 0, bitmap: Bitmap? = null) {
+fun Context.shareWXSceneSession(url: String="", title: String="", desc: String="", id: Int = 0, bitmap: Bitmap? = null) {
+    if(url.isNull()&&title.isNull()&&desc.isNotNull()){
+        share(desc)
+        return
+    }
     if (id != 0) {
-        share(url, title, desc, BitmapFactory.decodeResource(resources, id), SendMessageToWX.Req.WXSceneSession)
+        val bitmap=BitmapFactory.decodeResource(resources, id)
+        if(url.isNull()&&title.isNull()&&desc.isNull()){
+            share(bitmap)
+            return
+        }
+        share(url, title, desc,bitmap, SendMessageToWX.Req.WXSceneSession)
     } else if (bitmap != null) {
+        if(url.isNull()&&title.isNull()&&desc.isNull()){
+            share(bitmap)
+            return
+        }
         share(url, title, desc, bitmap!!, SendMessageToWX.Req.WXSceneSession)
     }
 
@@ -41,20 +53,55 @@ private fun share(url: String = "", title: String = "", desc: String = "", bmp: 
         message = WXMediaMessage(WXWebpageObject().apply { webpageUrl = url }).apply {
             this.title = title
             description = desc
-            thumbData = bmpToByteArray(bmp, true)
+            val bitmap=Bitmap.createScaledBitmap(bmp,80,80,true)
+            bmp.recycle()
+            thumbData = bmpToByteArray(bitmap, true)
         }
         scene = scenes
     })
 }
-
-fun Context.shareWXSceneTimeline(url: String, title: String, desc: String, id: Int = 0, bitmap: Bitmap? = null) {
+private fun share(bmp: Bitmap, scenes: Int = SendMessageToWX.Req.WXSceneSession) {
+    BApplication.wxApi?.sendReq(SendMessageToWX.Req().apply {
+        transaction = "img${System.currentTimeMillis()}"
+        message = WXMediaMessage().apply {
+            mediaObject= WXImageObject(bmp)
+            val bitmap=Bitmap.createScaledBitmap(bmp,80,80,true)
+            bmp.recycle()
+            thumbData = bmpToByteArray(bitmap, true)
+        }
+        scene = scenes
+    })
+}
+private fun share(text:String, scenes: Int = SendMessageToWX.Req.WXSceneSession) {
+    BApplication.wxApi?.sendReq(SendMessageToWX.Req().apply {
+        transaction = "text${System.currentTimeMillis()}"
+        message = WXMediaMessage().apply {
+            mediaObject=WXTextObject().apply { this.text=text }
+            description=text
+        }
+        scene = scenes
+    })
+}
+fun Context.shareWXSceneTimeline(url: String="", title: String="", desc: String="", id: Int = 0, bitmap: Bitmap? = null) {
+    if(url.isNull()&&title.isNull()&&desc.isNotNull()){
+        share(desc,SendMessageToWX.Req.WXSceneTimeline)
+        return
+    }
     if (id != 0) {
-        share(url, title, desc, BitmapFactory.decodeResource(resources, id), SendMessageToWX.Req.WXSceneTimeline)
+        val bmp=BitmapFactory.decodeResource(resources, id)
+        if(url.isNull()&&title.isNull()&&desc.isNull()){
+            share(bmp,SendMessageToWX.Req.WXSceneTimeline)
+            return
+        }
+        share(url, title, desc, bmp, SendMessageToWX.Req.WXSceneTimeline)
     } else if (bitmap != null) {
+        if(url.isNull()&&title.isNull()&&desc.isNull()){
+            share(bitmap,SendMessageToWX.Req.WXSceneTimeline)
+            return
+        }
         share(url, title, desc, bitmap!!, SendMessageToWX.Req.WXSceneTimeline)
     }
 }
-
 private fun bmpToByteArray(bmp: Bitmap, needRecycle: Boolean): ByteArray {
     val output = ByteArrayOutputStream()
     bmp.compress(CompressFormat.PNG, 100, output)

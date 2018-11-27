@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
+import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.MotionEvent
@@ -16,14 +17,15 @@ import android.view.ViewGroup
 import android.widget.HorizontalScrollView
 import android.widget.LinearLayout
 import android.widget.TextView
-import org.jetbrains.anko.backgroundColor
-import org.jetbrains.anko.dip
+import com.dyl.base_lib.R
+import com.ppx.kotlin.utils.inject.notify
+import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
-import org.jetbrains.anko.sdk25.coroutines.onScrollChange
 
 class SlidingTabLayout : HorizontalScrollView {
     var rv: RecyclerView? = null
     var vp: ViewPager? = null
+    var listTextView  = mutableListOf<TextView>()
     var list = mutableListOf<String>()
         set(value) {
             field = value
@@ -47,6 +49,7 @@ class SlidingTabLayout : HorizontalScrollView {
             isAntiAlias = true
         }
     }
+    var Pindex: Int = -1
 
     constructor(context: Context?) : super(context)
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
@@ -64,15 +67,22 @@ class SlidingTabLayout : HorizontalScrollView {
             minimumHeight = h.toInt()
             gravity = Gravity.CENTER_VERTICAL
         })
+        listTextView.clear()
         list.forEachIndexed { index, s ->
-            (getChildAt(0) as ViewGroup).addView(TextView(context).apply {
+            var textView = TextView(context)
+            listTextView.add(textView)
+            (getChildAt(0) as ViewGroup).addView(textView.apply {
                 minimumWidth = w.toInt()
                 minimumHeight = h.toInt()
                 text = s
                 gravity = Gravity.CENTER
                 setLineSpacing(0f, 1.2f)
                 setTextSize(TypedValue.COMPLEX_UNIT_DIP, 28f)
-                onClick {
+
+                setOnClickListener {
+                   // Pindex  = index
+                  //  it.backgroundResource  = R.color.e9d8
+
                     if (vp != null) {
                         vp?.currentItem = index
                     }
@@ -80,6 +90,16 @@ class SlidingTabLayout : HorizontalScrollView {
                         moveToPosition(map2height?.get(s) ?: 0)
                     }
                 }
+             /*   onClick {
+
+                    Log.w("test","s="+s+ " index="+index)
+                    if (vp != null) {
+                        vp?.currentItem = index
+                    }
+                    if (rv != null) {
+                        moveToPosition(map2height?.get(s) ?: 0)
+                    }
+                }*/
             })
         }
     }
@@ -89,6 +109,7 @@ class SlidingTabLayout : HorizontalScrollView {
         val lastItem = (rv?.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
         if (n <= firstItem) {
             rv?.scrollToPosition(n)
+
         } else if (n <= lastItem) {
             val top = rv?.getChildAt(n - firstItem)?.top ?: 0
             rv?.scrollBy(0, top)
@@ -99,25 +120,28 @@ class SlidingTabLayout : HorizontalScrollView {
 
     fun attachView(recyclerView: RecyclerView) {
         rv = recyclerView
-        recyclerView!!.onScrollChange { v, scrollX, scrollY, oldScrollX, oldScrollY ->
-            val size = scrollX % recyclerView.measuredWidth
-            val index = scrollX / recyclerView.measuredWidth
-            rect.left = index * w + size * w
-            rect.top = 0f
-            rect.right = index * w + size * w + w
-            rect.bottom = h
-            if (rect.left > measuredWidth / 2f - w / 2f) {
-                scrollTo(((index * w + size * w) - (measuredWidth / 2f - w / 2f)).toInt(), 0)
+        recyclerView!!.addOnScrollListener(object :RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val size = computeHorizontalScrollOffset() % recyclerView!!.measuredWidth
+                val index = computeHorizontalScrollOffset() / recyclerView!!.measuredWidth
+                rect.left = index * w + size * w
+                rect.top = 0f
+                rect.right = index * w + size * w + w
+                rect.bottom = h
+                if (rect.left > measuredWidth / 2f - w / 2f) {
+                    scrollTo(((index * w + size * w) - (measuredWidth / 2f - w / 2f)).toInt(), 0)
+                }
+                invalidate()
             }
-            invalidate()
-        }
+        })
     }
 
     fun attachVerView(recyclerView: RecyclerView) {
         rv = recyclerView
-        recyclerView!!.onScrollChange { v, scrollX, scrollY, oldScrollX, oldScrollY ->
-            //  scrollTo(w*recyclerView.layoutManager.f)
-        }
+//        recyclerView!!.onScrollChange { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+//            //  scrollTo(w*recyclerView.layoutManager.f)
+//        }
     }
 
     override fun onDraw(canvas: Canvas?) {

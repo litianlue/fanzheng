@@ -16,6 +16,8 @@ package com.dyl.base_lib.view;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.text.DynamicLayout;
 import android.text.Layout;
@@ -31,10 +33,15 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
+import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dyl.base_lib.R;
+import com.dyl.base_lib.util.ToastUtil;
 
 import java.lang.reflect.Field;
 
@@ -89,21 +96,24 @@ public class ExpandableTextView extends TextView {
     //  is specifically for inner toggle
     private ExpandableClickListener mExpandableClickListener;
     private OnExpandListener mOnExpandListener;
-
+    private Context  context;
     public ExpandableTextView(Context context) {
         super(context);
         init();
+        this.context  = context;
     }
 
     public ExpandableTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initAttr(context,attrs);
+        this.context  = context;
         init();
     }
 
     public ExpandableTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
        initAttr(context,attrs);
+       this.context  = context;
        init();
     }
     private void initAttr(Context context, AttributeSet attrs) {
@@ -161,6 +171,7 @@ public class ExpandableTextView extends TextView {
         }
         if(TextUtils.isEmpty(mToShrinkHint)){
             mToShrinkHint = getResources().getString(R.string.to_shrink_hint);
+
         }
         if(mToggleEnable){
             mExpandableClickListener = new ExpandableClickListener();
@@ -388,11 +399,14 @@ public class ExpandableTextView extends TextView {
         void onShrink(ExpandableTextView view);
     }
 
-    private class ExpandableClickListener implements OnClickListener {
+
+    private class ExpandableClickListener implements OnClickListener{
         @Override
         public void onClick(View view) {
             toggle();
+
         }
+
     }
 
     public OnClickListener getOnClickListener(View view) {
@@ -460,7 +474,7 @@ public class ExpandableTextView extends TextView {
             if(hasOnClickListeners()
                     && (getOnClickListener(ExpandableTextView.this) instanceof ExpandableClickListener)) {
             }else{
-                toggle();
+                //toggle();
             }
         }
 

@@ -3,6 +3,7 @@ package com.dyl.base_lib.view
 import android.content.Context
 import android.graphics.Paint
 import android.graphics.Typeface
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.ColorDrawable
 import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
@@ -23,6 +24,7 @@ import com.dyl.base_lib.external.address.CityPicker
 import com.dyl.base_lib.show.anim.animation
 import com.ppx.kotlin.utils.inject.inflate
 import kotlinx.android.synthetic.main.select_address.view.*
+import org.jetbrains.anko.dip
 import org.jetbrains.anko.layoutInflater
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.wrapContent
@@ -157,10 +159,10 @@ fun View.showLoadDialog(w: Int = wrapContent, h: Int = wrapContent, call: (v: Vi
     return dialog
 }
 
-fun BaseView.showPopup(call: (v: View) -> Unit): PopupWindow {
+fun BaseView.showPopup(h:Int= wrapContent, call: (v: View) -> Unit): PopupWindow {
     val rootview = (context as BaseActivity).findViewById<ViewGroup>(android.R.id.content)
     var heig = wrapContent
-    val popwindow = PopupWindow(getView(), context.width, heig).apply {
+    val popwindow = PopupWindow(getView(), context.width, h).apply {
         animationStyle = R.style.showPopupAnimation
         isFocusable = true
         setBackgroundDrawable(ColorDrawable(context.getAColor(R.color.shadow)))
@@ -187,10 +189,20 @@ fun BaseView.showPopup(call: (v: View) -> Unit): PopupWindow {
     }
     return popwindow
 }
-
-fun View.showPopup(call: (v: View) -> Unit): PopupWindow {
-    val rootview = (context as BaseActivity).findViewById<ViewGroup>(android.R.id.content)
-    var heig = wrapContent
+fun View.showAnimDialog(w: Int = wrapContent, h: Int = wrapContent, anim: Int = R.style.showPopupAnimation, call: (v: View) -> Unit): AppCompatDialog {
+    val dialog = AppCompatDialog(context, R.style.dialog_theme)
+    dialog.setContentView(this)
+    dialog.window.setWindowAnimations(anim)
+    dialog.show()
+    val lp = dialog.window.attributes as android.view.WindowManager.LayoutParams
+    lp.width = w
+    lp.height = h
+    dialog.window.attributes = lp
+    return dialog
+}
+fun View.showPopup(h:Int= wrapContent, call: (v: View) -> Unit): PopupWindow {
+    val rootview = (context as BaseActivity).window.decorView
+    var heig = h
     val popwindow = PopupWindow(this, context.width, heig).apply {
         animationStyle = R.style.showPopupAnimation
         isFocusable = true
@@ -209,7 +221,8 @@ fun View.showPopup(call: (v: View) -> Unit): PopupWindow {
             }
 
         }
-    }.apply { showAtLocation(rootview, Gravity.BOTTOM, 0, 0) }
+    }.apply {
+        showAtLocation(rootview, Gravity.BOTTOM, 0, 0) }
     this@showPopup!!.animation(1f, 0.6f) {
         val lp = (context as BaseActivity).window
                 .attributes
@@ -219,6 +232,18 @@ fun View.showPopup(call: (v: View) -> Unit): PopupWindow {
     return popwindow
 }
 
+fun View.showAsPopup(rootview: View, w: Int = wrapContent, h: Int = wrapContent, dissmiss: () -> Unit): PopupWindow {
+    val popwindow = PopupWindow(this, w, h).apply {
+        animationStyle = R.style.showAsPopupAnimation
+        isFocusable = true
+        isOutsideTouchable=true
+        setBackgroundDrawable(BitmapDrawable())
+        setOnDismissListener { dissmiss.invoke() }
+    }.apply {
+        showAsDropDown(rootview)
+    }
+    return popwindow
+}
 fun Context.showAddressSelect(call: CityPicker.OnSelectingListener) {
     inflate { R.layout.select_address }.apply {
         val dialog = showPopup { }

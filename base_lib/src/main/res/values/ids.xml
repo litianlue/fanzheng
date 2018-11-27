@@ -3,4 +3,5 @@
     <item type="id" name="tag_first"/>
     <item type="id" name="tag_second"/>
     <item type="id" name="tag_notify"/>
+    <item type="id" name="slide_frame"/>
 </resources>

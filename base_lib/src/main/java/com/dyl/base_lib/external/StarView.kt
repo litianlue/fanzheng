@@ -74,7 +74,7 @@ class StarView : View {
 
     }
 
-    inline fun fivePoints(xA: Float, yA: Float, rFive: Int): Array<PointF> {
+     fun fivePoints(xA: Float, yA: Float, rFive: Int): Array<PointF> {
         val pb = PointF(0F, 0F)
         val pc = PointF(0F, 0F)
         var pd = PointF(0F, 0F)

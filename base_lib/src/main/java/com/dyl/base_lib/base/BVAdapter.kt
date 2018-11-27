@@ -10,7 +10,7 @@ import android.view.ViewGroup
  */
 abstract class BVAdapter<T> : RecyclerView.Adapter<BVAdapter.Item>() {
     var list: MutableList<T> = mutableListOf()
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): Item = Item(getView(parent!!.context, viewType))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Item = Item(getView(parent!!.context, viewType))
 
     override fun onBindViewHolder(holder: Item, position: Int) {
         onNotify(holder.itemView,position,currentPosition(position))

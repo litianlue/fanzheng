@@ -6,6 +6,7 @@ import android.content.res.Resources
 import android.util.DisplayMetrics
 import android.util.Log
 import com.dyl.base_lib.BuildConfig
+import com.dyl.base_lib.data.sp.getSpData
 import com.dyl.base_lib.model.CoockieData
 import com.dyl.base_lib.net.HttpLoggingInterceptor
 import com.orhanobut.logger.AndroidLogAdapter
@@ -16,20 +17,24 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
+
 /**
  * Created by dengyulin on 2018/3/31.
  */
 fun Application.init() {
+
     initLog()
     NET
     initDatabase()
 //    applicationContext.initDisplaySize(resources::class.java)
 }
+
+
 val <T> T.NET: Retrofit by lazy {
     initNet()
 }
 
-tailrec fun Context.initDisplaySize(res: Resources, c: Class<*>):Resources {
+tailrec fun Context.initDisplaySize(res:Resources,c: Class<*>):Resources {
     c.declaredFields.forEach {
         it.isAccessible = true
         it.get(res)?.let { a ->
@@ -112,14 +117,14 @@ tailrec fun Context.initDisplaySize(c: Class<*>) {
     val clz = c.superclass ?: return
     initDisplaySize(clz)
 }
-inline fun initNet() =
+ fun initNet() =
         Retrofit.Builder()
                 .baseUrl(BuildConfig.HOSTPATH)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(initOkHttp())
                 .build()!!
 
-inline fun getCookiemmp(): String {
+ fun getCookiemmp(): String {
     if (CoockieData.cookies.isNotEmpty()) {
         val sb = StringBuffer()
         val list = CoockieData.cookies
@@ -131,7 +136,7 @@ inline fun getCookiemmp(): String {
     return ""
 }
 
-inline fun savaCookie(cookie: List<String>) {
+ fun savaCookie(cookie: List<String>) {
     if (cookie.isNotEmpty()) {
         val map = CoockieData.cookies
         cookie.forEach {
@@ -142,7 +147,7 @@ inline fun savaCookie(cookie: List<String>) {
     }
 }
 
-inline fun initOkHttp(): OkHttpClient = OkHttpClient.Builder()
+ fun initOkHttp(): OkHttpClient = OkHttpClient.Builder()
         .addInterceptor {
             val proceed = it.proceed(it.request().newBuilder()
                     .header("Accept-Language", "en,zh-CN,zh")
@@ -160,9 +165,11 @@ inline fun initOkHttp(): OkHttpClient = OkHttpClient.Builder()
         .build()!!
 
 
-inline fun initInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
+ fun initInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
     override fun log(chain: Interceptor.Chain?, message: String?) {
-        Log.d("okhttp-${chain?.request()?.url()?.uri()?.path}", message)
+        if(BuildConfig.DEBUG){
+            Log.d("okhttp-${chain?.request()?.url()?.uri()?.path}", message)
+        }
     }
 
     override fun body(chain: Interceptor.Chain?, json: String?) {
@@ -171,10 +178,10 @@ inline fun initInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor(ob
 }).apply { level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.HEADERS }!!
 
 
-inline fun initDatabase() {
+ fun initDatabase() {
 
 }
 
-inline fun initLog() {
+ fun initLog() {
     Logger.addLogAdapter(AndroidLogAdapter())
 }

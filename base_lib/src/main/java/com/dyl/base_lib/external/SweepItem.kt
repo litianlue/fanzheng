@@ -3,6 +3,7 @@ package com.dyl.base_lib.external
 import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
+import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.MotionEvent
@@ -17,6 +18,8 @@ import org.jetbrains.anko.*
  * Created by dengyulin on 2017/9/12.
  */
 class SweepItem : FrameLayout {
+
+
     var otherView: View? = null
     var lastPointX: Float = 0f
     var lastPointY: Float = 0f
@@ -39,11 +42,16 @@ class SweepItem : FrameLayout {
     fun resetNoAnim() {
         otherView!!.translationX=0f
     }
+    var recyclerView:BMPRecyclerView? =null
+    fun setReclerView(recyclerView:BMPRecyclerView?){
+        this.recyclerView = recyclerView
+    }
 
     constructor(context: Context?) : super(context, null)
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs, 0)
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
         mTouchSlope = ViewConfiguration.get(context).scaledPagingTouchSlop
+
     }
 
     override fun onFinishInflate() {
@@ -116,8 +124,10 @@ class SweepItem : FrameLayout {
             }
             MotionEvent.ACTION_UP -> {
                 if (Math.abs(otherView!!.translationX) > delete.measuredWidth / 2f) {
+                    recyclerView?.forbidMoveLeft(false)
                     otherView!!.move(otherView!!.translationX, x1 = -delete.measuredWidth.toFloat(), time = 250)
                 } else {
+                    recyclerView?.forbidMoveLeft(true)
                     reset()
                 }
                 lastPointX = 0f

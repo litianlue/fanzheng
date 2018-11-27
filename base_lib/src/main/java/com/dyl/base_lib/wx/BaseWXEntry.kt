@@ -19,10 +19,9 @@ import com.tencent.mm.opensdk.openapi.IWXAPI
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler
 
 open class BaseWXEntry : Activity(), IWXAPIEventHandler {
-    var code: String = ""
+    var code: String? = ""
     var resp: BaseResp? = null
     private var api: IWXAPI? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         api = BApplication.wxApi
@@ -43,37 +42,45 @@ open class BaseWXEntry : Activity(), IWXAPIEventHandler {
         if (baseResp != null) {
             resp = baseResp
         }
-        if (resp!!.type == ConstantsAPI.COMMAND_SENDMESSAGE_TO_WX) {
-            when (resp!!.errCode) {
-                BaseResp.ErrCode.ERR_OK -> {
-                    sendEvent(WeiXin.WXShareResult(resp!!.errCode.toString()))
-                  //  sendEvent("已经分享成功")
-                    toast("分享成功")
-                }
-                BaseResp.ErrCode.ERR_USER_CANCEL ->
-                    toast("取消分享")
-                BaseResp.ErrCode.ERR_SENT_FAILED ->
-                    toast("分享失败")
-            }
-            finish()
-        } else {
-            //微信登录授权返回值
-            code = (baseResp as SendAuth.Resp).code //即为所需的code
-            when (baseResp.errCode) {
-                BaseResp.ErrCode.ERR_OK -> {
-                    if (code.isNull()) {
+        when(resp?.type){
+            ConstantsAPI.COMMAND_SENDAUTH->{
+                code = (baseResp as SendAuth.Resp).code //即为所需的code
+                when (resp?.errCode) {
+                    BaseResp.ErrCode.ERR_OK -> {
+                        if ((code ?: "").isNull()) {
+                            finish()
+                            return
+                        }
+                        sendEvent(WeiXin.WXCODE(code!!))
                         finish()
-                        return
                     }
-                    sendEvent<Any, Any>(WeiXin.WXCODE(code))
-                    finish()
+                    BaseResp.ErrCode.ERR_USER_CANCEL -> {
+                        finish()
+                    }
+                    BaseResp.ErrCode.ERR_AUTH_DENIED -> {
+                        finish()
+                    }
+                    BaseResp.ErrCode.ERR_UNSUPPORT -> {
+                        finish()
+                    }
+                    else -> {
+                        finish()
+                    }
                 }
-                BaseResp.ErrCode.ERR_USER_CANCEL -> {
-                    finish()
+            }
+            ConstantsAPI.COMMAND_SENDMESSAGE_TO_WX->{
+                when (resp?.errCode) {
+                    BaseResp.ErrCode.ERR_OK -> {
+                        sendEvent(WeiXin.WXShareResult(resp!!.errCode.toString()))
+                        //  sendEvent("已经分享成功")
+                        //toast("分享成功")
+                    }
+                    BaseResp.ErrCode.ERR_USER_CANCEL ->
+                        toast("取消分享")
+                    BaseResp.ErrCode.ERR_SENT_FAILED ->
+                        toast("分享失败")
                 }
-                BaseResp.ErrCode.ERR_AUTH_DENIED -> {
-                    finish()
-                }
+                finish()
             }
         }
 

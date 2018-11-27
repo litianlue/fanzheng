@@ -171,10 +171,10 @@ public class ScrollerNumberPicker extends View {
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		// TODO Auto-generated method stub
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-		controlWidth = getWidth();
+		controlWidth = getMeasuredWidth();
 		if (controlWidth != 0) {
-			setMeasuredDimension(getWidth(), itemNumber * unitHeight);
-			controlWidth = getWidth();
+			setMeasuredDimension(getMeasuredWidth(), itemNumber * unitHeight);
+			controlWidth = getMeasuredWidth();
 		}
 
 	}

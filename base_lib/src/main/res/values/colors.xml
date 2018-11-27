@@ -2,6 +2,7 @@
 <resources>
     <color name="main_color">#edc50e</color>
     <color name="black">#000000</color>
+    <color name="c222">#222222</color>
     <color name="shadow">#10000000</color>
     <color name="trans">#00000000</color>
     <!--zxing-->
@@ -15,6 +16,9 @@
     <color name="status_text">#ffffff</color>
     <color name="viewfinder_mask">#50000000</color>
     <color name="react">#63B8FF</color>
-    <color name="red">#e21818</color>
     <color name="scanLineColor">#63B8FF</color>
+    <color name="w_gray">#f0f0f0</color>
+    <color name="ceewhite">#eeffffff</color>
+    <color name="e9d8">#e9d8c4</color>
+    <color name="f5e8d9">#f5e8d9</color>
 </resources>

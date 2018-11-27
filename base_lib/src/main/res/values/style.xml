@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="showPopupAnimation" parent="android:Animation">
+    <style name="showPopupAnimation">
         <item name="android:windowExitAnimation">@anim/dialog_exit</item>
         <item name="android:windowEnterAnimation">@anim/dialog_in</item>
     </style>
@@ -10,8 +10,23 @@
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowIsTranslucent">false</item>
     </style>
-    <style name="Transparent" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowIsTranslucent">true</item>
+    <style name="showAsPopupAnimation" parent="android:Animation">
+        <item name="android:windowExitAnimation">@anim/as_popup_exit</item>
+        <item name="android:windowEnterAnimation">@anim/as_popup_in</item>
+    </style>
+    <style name="ucrop_theme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="toolbarStyle">@style/toolbar_theme</item>
+        <item name="colorPrimary">@color/main_color</item>
+        <item name="colorPrimaryDark">@color/main_color</item>
+        <item name="colorAccent">@color/main_color</item>
+    </style>
+    <style name="toolbar_theme" parent="Base.Widget.AppCompat.Toolbar">
+        <item name="android:actionBarSize">110dp</item>
+        <item name="background">@color/main_color</item>
+        <item name="titleTextStyle">@style/AppTheme.ActionBarTitleTextStyle</item>
+    </style>
+    <style name="AppTheme.ActionBarTitleTextStyle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">26dp</item>
+        <item name="android:textColor">#ffffff</item>
     </style>
 </resources>

@@ -5,10 +5,15 @@ import android.content.Intent
 import android.os.Looper
 import android.support.annotation.LayoutRes
 import android.view.KeyEvent
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.dyl.base_lib.R
 import com.dyl.base_lib.data.cache.Cache
+import com.dyl.base_lib.util.NetworkUtil
 import com.dyl.base_lib.view.inflateView
+import com.dyl.base_lib.view.show
+import com.ppx.kotlin.utils.inject.inflate
 import org.jetbrains.anko.sdk25.coroutines.onAttachStateChangeListener
 
 /**
@@ -34,9 +39,10 @@ abstract class BaseView {
         initData()
     }
 
-
     open fun initContentView(@LayoutRes id: Int, call: View.() -> Unit = {}) {
+
         v = context.inflateView(id)
+
         v!!.onAttachStateChangeListener {
             onViewAttachedToWindow {
                 onShow()
@@ -47,6 +53,7 @@ abstract class BaseView {
             }
         }
         call.invoke(v!!)
+
         (context as BaseActivity)
     }
 

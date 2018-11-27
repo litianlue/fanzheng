@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import com.dyl.base_lib.data.cache.Cache
 import com.dyl.base_lib.data.sp.getSpData
 import com.dyl.base_lib.data.sp.putSpData
+import com.dyl.base_lib.data.sp.rmSpTag
 import com.google.gson.Gson
 import java.io.File
 
@@ -29,6 +30,10 @@ class CoockieData {
 
         fun reset(context: Context) {
             cookies = Gson().fromJson(context.getSpData(Cache.COOKIE, ""), cookies::class.java)
+        }
+        fun rm(context: Context) {
+            cookies= mutableMapOf()
+            context.rmSpTag(Cache.COOKIE)
         }
     }
 }

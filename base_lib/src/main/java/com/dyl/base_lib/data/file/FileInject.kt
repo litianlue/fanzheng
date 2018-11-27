@@ -6,6 +6,7 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import com.dyl.base_lib.util.ToastUtil
 import java.io.*
 import java.text.DecimalFormat
 
@@ -37,7 +38,6 @@ fun View.savaBitmap() {
             val fileName=createNewFile( "${Environment
                     .getExternalStorageDirectory().path}/cjypcache/${System.currentTimeMillis()}.jpg")
             val out=FileOutputStream(fileName)
-            Log.w("test","fileName="+fileName)
             bitmap?.compress(Bitmap.CompressFormat.JPEG,100,out)
             out.flush()
             out.close()
@@ -64,12 +64,12 @@ fun View.savaBitmap(i: Int) {
             val fileName=createNewFile( "${Environment
                     .getExternalStorageDirectory().path}/cjypcache/${System.currentTimeMillis()+i}.jpg")
             val out=FileOutputStream(fileName)
-            Log.w("test","fileName="+fileName)
             bitmap?.compress(Bitmap.CompressFormat.JPEG,100,out)
             out.flush()
             out.close()
             MediaStore.Images.Media.insertImage(context.contentResolver,
                     bitmap, fileName.name, null)
+
             /* MediaStore.Images.Media.insertImage(context.contentResolver,
                      bitmap, fileName.name, null)
              val mediaScanIntent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE)

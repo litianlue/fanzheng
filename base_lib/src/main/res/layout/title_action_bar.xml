@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="130dp"
+    android:paddingTop="50dp"
+    android:id="@+id/base_t_layout"
+    android:background="@color/black">
+    <FrameLayout
+        android:id="@+id/title_back"
+        android:layout_width="80dp"
+        android:layout_height="80dp">
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="38dp"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="30dp"
+            android:src="@drawable/back_black"/>
+    </FrameLayout>
+    <TextView
+        android:id="@+id/title_name"
+        android:layout_width="225dp"
+        android:layout_height="80dp"
+        android:singleLine="true"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:textSize="34dp"
+        android:textColor="#fff"/>
+    <TextView
+        android:id="@+id/title_share"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:singleLine="true"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_marginRight="30dp"
+        android:layout_gravity="right"
+        android:textSize="28dp"
+        android:textColor="#fff"/>
+    <ImageView
+        android:id="@+id/check_img"
+        android:singleLine="true"
+        android:layout_marginTop="21dp"
+        android:gravity="center"
+        android:visibility="visible"
+        android:layout_marginRight="30dp"
+        android:layout_gravity="right"
+        android:layout_width="38dp"
+        android:layout_height="38dp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="79dp"
+        android:background="#dddddd"/>
+</FrameLayout>

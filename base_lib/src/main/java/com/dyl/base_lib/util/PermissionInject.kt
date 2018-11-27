@@ -5,7 +5,6 @@ import com.dyl.base_lib.base.BaseActivity
 import com.yxp.permission.util.lib.PermissionUtil
 import com.yxp.permission.util.lib.callback.PermissionResultCallBack
 
-
 fun Context.reqPermission(vararg permissions:String,call:()->Unit){
     PermissionUtil.getInstance().request(this as BaseActivity, permissions,
             object : PermissionResultCallBack {

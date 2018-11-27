@@ -17,7 +17,7 @@ import kotlinx.coroutines.experimental.channels.NULL_VALUE
  */
 abstract class BpAdapter<T> : RecyclerView.Adapter<BpAdapter.Item>() {
     var list: MutableList<T> = mutableListOf()
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): Item = Item(getView(parent!!.context, viewType))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Item = Item(getView(parent!!.context, viewType))
 
     override fun onBindViewHolder(holder: Item, position: Int) {
 //        holder.itemView.notifyData(position,currentPosition(position))

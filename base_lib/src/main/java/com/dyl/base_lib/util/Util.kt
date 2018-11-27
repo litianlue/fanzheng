@@ -46,6 +46,18 @@ public fun Double.to2Double(): String {
     val df = DecimalFormat("######0.00")
     return df.format(this)
 }
+public fun Double.keep2Double(): Double {
+    return to2Double().toDouble()
+}
+
+public fun Double.toAutoDouble(): String {
+    val sd = keep2Double()
+    return if (sd.toString().split(".")[1].toInt() > 0) {
+        sd.toString()
+    } else {
+        sd.toLong().toString()
+    }
+}
 
 public fun String.isNull(): Boolean {
     return this == null || this == "" || this.trim().isEmpty()

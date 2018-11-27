@@ -138,7 +138,7 @@ public class TimeDateUtil
         return seconds;
     }
     //毫秒转换成天、小时、分
-    public static String longToString(long diff,String str){
+    public static String longToString(long diff,String str,int index){
 
         long days = diff / (1000 * 60 * 60 * 24);
 
@@ -147,8 +147,15 @@ public class TimeDateUtil
         long minutes = (diff-days*(1000 * 60 * 60 * 24)-hours*(1000* 60 * 60))/(1000* 60);
 
         long seconds = (diff-days*(1000 * 60 * 60 * 24)-hours*(1000* 60 * 60)-minutes*(1000*60))/1000;
-
-        return "请在"+days+"天"+hours+"小时"+minutes+"分内"+str+"，超时自动取消";
+        if (index == 0){
+            if (str == "确认收货"){
+                return "请在"+days+"天"+hours+"小时"+minutes+"分内"+str+"，超时订单将自动确认收货";
+            }else {
+                return "请在"+days+"天"+hours+"小时"+minutes+"分内"+str+"，超时自动取消";
+            }
+        }else {
+            return "系统将在"+days+"天"+hours+"小时"+minutes+"分内"+"自动通过您的申请";
+        }
     }
 
 

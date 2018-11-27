@@ -6,6 +6,7 @@ import android.support.annotation.DrawableRes
 import android.support.v4.view.MotionEventCompat
 import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
@@ -16,6 +17,13 @@ import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.delay
 import kotlinx.coroutines.experimental.launch
 import org.jetbrains.anko.dip
+import android.support.v7.widget.LinearLayoutManager
+import android.opengl.ETC1.getHeight
+import android.opengl.ETC1.getWidth
+import android.view.WindowManager
+import android.widget.OverScroller
+import kotlinx.android.synthetic.main.select_address.view.*
+import kotlinx.coroutines.experimental.android.UI
 
 
 /**
@@ -24,7 +32,7 @@ import org.jetbrains.anko.dip
 
 open class BMPRecyclerView : RecyclerView {
     private val INVALID_POINTER = -1
-    private var overScroller: Scroller? = null
+    private var overScroller: OverScroller? = null
     private var mActivePointerId: Int = 0
     private var mLastY = 0f
     private var rotate = 0f
@@ -87,8 +95,6 @@ open class BMPRecyclerView : RecyclerView {
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
         init(context)
     }
-
-
     //脚部下拉
     private fun getFootPy(deltaY: Int): Int {
         //整体高度 - 滑动X - 页面高度 +滑动距离
@@ -102,7 +108,6 @@ open class BMPRecyclerView : RecyclerView {
         }
         return (deltaY * Math.pow(((verticalSpace.toFloat() - totalMove - deltaY) / verticalSpace.toFloat()).toDouble(), 5.0)).toInt()
     }
-
     //头部下拉
     private fun getHeadPy(deltaY: Int): Int {
         if (childCount > 0) {
@@ -155,6 +160,7 @@ open class BMPRecyclerView : RecyclerView {
                 mActivePointerId = ev.getPointerId(0)
             }
             MotionEvent.ACTION_CANCEL -> {
+
                 mActivePointerId = INVALID_POINTER
                 if (isLoad == 1) {
                     resetToLoad()
@@ -165,53 +171,78 @@ open class BMPRecyclerView : RecyclerView {
                 }
             }
             MotionEvent.ACTION_UP -> {
+
                 /* Release the drag */
                 mActivePointerId = INVALID_POINTER
                 if (isLoad == 1) {
                     resetToLoad()
                 } else if (isNext == 1) {
+
                     resetToNext()
                 } else if (isNext == 0 && isLoad == 0) {
-                    reset()
-                }
 
+                    var layoutManager = this.layoutManager
+                    val lm = layoutManager as LinearLayoutManager
+                    var positon = lm.findFirstVisibleItemPosition()
+                    if (positon < 0)
+                        resetToNext()
+                    else
+                        reset()
+                }
             }
-            MotionEvent.ACTION_POINTER_UP -> onSecondaryPointerUp(ev)
+            MotionEvent.ACTION_POINTER_UP -> {
+
+                onSecondaryPointerUp(ev)
+            }
         }
         return super.dispatchTouchEvent(ev)
     }
 
     private var lastPointX = 0f
     private var lastPointY = 0f
-    override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
-        super.onInterceptTouchEvent(ev)
-        var isTouch = false
-        when (ev!!.action) {
-            MotionEvent.ACTION_DOWN -> {
-                lastPointX = ev.x
-                lastPointY = ev.y
-            }
-            MotionEvent.ACTION_MOVE -> {
-                val xDiff = Math.abs(lastPointX - ev.x)
-                val yDiff = Math.abs(ev.y - lastPointY)
-                if (yDiff > mTouchSlope && yDiff * 0.5f > xDiff) {
-                    requestDisallowInterceptTouchEvent(true)
-                    isTouch = true
-                } else {
-                    isTouch = false
-                }
-                lastPointX = ev.x
-                lastPointY = ev.y
-            }
-            MotionEvent.ACTION_UP -> {
-                lastPointX = 0f
-                lastPointY = 0f
-                isTouch = false
 
-            }
-        }
-        return isTouch
+    private var forbid: Boolean = false //1 禁止向左边滑动
+    fun forbidMoveLeft(mode: Boolean) {
+        forbid = mode
     }
+//    override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
+//        super.onInterceptTouchEvent(ev)
+//        var isTouch = false
+//        when (ev!!.action) {
+//            MotionEvent.ACTION_DOWN -> {
+//                lastPointX = ev.x
+//                lastPointY = ev.y
+//            }
+//            MotionEvent.ACTION_MOVE -> {
+//
+//                if(ev.x -lastPointX >0){
+//                    if(forbid) {
+//                        lastPointX = ev.x
+//                        lastPointY = ev.y
+//                        return true
+//                    }
+//                }
+//                val xDiff = Math.abs(lastPointX - ev.x)
+//                val yDiff = Math.abs(ev.y - lastPointY)
+//                if (yDiff > mTouchSlope && yDiff * 0.5f > xDiff) {
+//                    requestDisallowInterceptTouchEvent(true)
+//                    isTouch = true
+//                } else {
+//                    isTouch = false
+//                }
+//                lastPointX = ev.x
+//                lastPointY = ev.y
+//            }
+//            MotionEvent.ACTION_UP -> {
+//
+//                lastPointX = 0f
+//                lastPointY = 0f
+//                isTouch = false
+//
+//            }
+//        }
+//        return isTouch
+//    }
 
 
     private fun moveTo(move: Int) {
@@ -220,7 +251,6 @@ open class BMPRecyclerView : RecyclerView {
         } else {
             totalMove -= move
         }
-
     }
 
     private fun onSecondaryPointerUp(ev: MotionEvent) {
@@ -315,15 +345,21 @@ open class BMPRecyclerView : RecyclerView {
         }
         totalMove = 0
     }
-
     private fun nextScroll(move: Int) {
         if (computeVerticalScrollRange() > verticalSpace) {
             overScroller!!.startScroll(0, move, 0, (computeVerticalScrollRange() - verticalSpace) - move + loadHeight, 250)
             scrollyY = 0
+            var i = (computeVerticalScrollRange() - verticalSpace) - move + loadHeight
+            if(Math.abs(i)*2>loadHeight*2)
+                moveTo(Math.abs(i)*2)
+            else
+                moveTo(Math.abs(i)*4)
         } else {
             overScroller!!.startScroll(0, move, 0, -move + loadHeight, 250)
             scrollyY = move
+
         }
+
     }
 
     private fun resetToNext() {
@@ -345,7 +381,6 @@ open class BMPRecyclerView : RecyclerView {
         totalMove = 0
 
     }
-
     override fun onMeasure(widthSpec: Int, heightSpec: Int) {
         super.onMeasure(widthSpec, heightSpec)
 
@@ -393,8 +428,10 @@ open class BMPRecyclerView : RecyclerView {
 
     var scrollyY = 0
     override fun computeScroll() {
+
         if (overScroller!!.computeScrollOffset()) {
             if (scrollyY != 0) {
+
                 var dy = (if (childCount > 0) scrollyY else totalMove) - overScroller!!.currY
                 if (childCount > 0) {
                     if (computeVerticalScrollRange() < verticalSpace) {
@@ -408,14 +445,15 @@ open class BMPRecyclerView : RecyclerView {
                         if (isNext == 2) {
                             if (computeVerticalScrollOffset() - dy <= context.dip(120)) {
                                 overScroller?.abortAnimation()
-                                offsetChildrenVertical(scrollyY-overScroller!!.finalY)
+
+                                offsetChildrenVertical(scrollyY - overScroller!!.finalY)
                                 scrollyY -= dy
                                 invalidate()
                                 return
                             }
                         }
-
                     }
+
                     offsetChildrenVertical(dy)
 
                 } else {
@@ -423,6 +461,7 @@ open class BMPRecyclerView : RecyclerView {
                 }
 
                 scrollyY -= dy
+
                 invalidate()
             } else {
                 var dy = (if (childCount > 0) computeVerticalScrollOffset() else totalMove) - overScroller!!.currY
@@ -435,7 +474,7 @@ open class BMPRecyclerView : RecyclerView {
     }
 
     private fun init(context: Context) {
-        overScroller = Scroller(context)
+        overScroller = OverScroller(context)
         post { scrollTo(0, 0) }
         bitmap ?: loadBitmap(R.drawable.load)
         overScrollMode = View.OVER_SCROLL_NEVER
