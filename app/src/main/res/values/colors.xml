@@ -64,6 +64,7 @@
     <color name="ff31">#ff3132</color>
     <color name="ee9b">#ee9b9b</color>
     <color name="d4d4d">#4d4d4d</color>
-
+    <color name="c4545">#454545</color>
     <color name="photopicker_background">#181819</color>
+    <color name="f840a">#ff840a</color>
 </resources>

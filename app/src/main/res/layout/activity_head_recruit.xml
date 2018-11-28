@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="447dp"
+        android:src="@mipmap/head_recruit_bg"/>
+    <FrameLayout
+        android:layout_width="690dp"
+        android:layout_height="370dp"
+        android:orientation="vertical"
+        android:layout_marginTop="352dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/white_bg">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="30dp"
+            android:textColor="@color/f840a"
+            android:padding="45dp"
+            android:text="加入我们活的优秀的平台、巨大的发展空间。完全免费式的家庭工作，收益丰厚。"/>
+        <Button
+            android:id="@+id/btn_head"
+            android:layout_width="560dp"
+            android:layout_height="80dp"
+            android:background="@mipmap/icon_phone"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="200dp"
+            android:text="我要成为初家优品团长"
+            android:textSize="30dp"
+            android:textColor="@color/white"/>
+    </FrameLayout>
+
+</RelativeLayout>
