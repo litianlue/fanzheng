@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.dyl.base_lib.external.BMPRecyclerView
+    android:id="@+id/rv_order"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="750dp"
+    android:minWidth="750dp"
+    android:layout_height="match_parent">
+
+</com.dyl.base_lib.external.BMPRecyclerView>

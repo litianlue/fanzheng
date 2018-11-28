@@ -19,7 +19,7 @@ class HeadRecruitActivity : BaseActivity() {
         btn_head.onClick {
             CallDialogView(this@HeadRecruitActivity,"13800138000"){
 
-            }.apply { dialog = showDialog(630, 500) { } }
+            }.apply { dialog = showDialog(dip(630), dip(600)) { } }
         }
     }
 }

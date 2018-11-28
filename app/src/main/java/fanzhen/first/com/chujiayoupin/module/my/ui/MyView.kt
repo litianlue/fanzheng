@@ -25,7 +25,7 @@ class MyView(context: Context) : BaseView(context) {
         initContentView(R.layout.layout_my)
         v!!.iv_head_pic.loadAutoImage("", error = R.mipmap.ic_default_head, radius = -1)
         v!!.iv_head_pic.onClick { startActivity<PersonalIinfoActivity>() }
-        v!!.rl_myorder.onClick {  }
+        v!!.rl_myorder.onClick { startActivity<MyOrderActivity>() }
         v!!.rl_head.onClick { startActivity<HeadRecruitActivity>() }
         v!!.rl_head_info.onClick { startActivity<HeadInfoActivity>() }
     }
