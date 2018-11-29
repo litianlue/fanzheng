@@ -1,7 +1,7 @@
 package com.first.chujiayoupin.model
 
 import com.dyl.base_lib.model.ReqModel
-import fanzhen.first.com.chujiayoupin.module.home.HomeView.Companion.shopNo
+import fanzhen.first.com.chujiayoupin.module.home.ui.HomeView.Companion.shopNo
 
 
 data class HFRequstModel(

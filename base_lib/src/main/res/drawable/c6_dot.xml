@@ -4,16 +4,16 @@
     <!-- 内部颜色 -->
     <!--默认图形大小-->
     <size
-        android:width="750dp"
+        android:width="100dp"
         android:height="100dp" />
     <solid
-        android:color="@color/line" />
+        android:color="#886e6e6e" />
     <!-- 边缘线条颜色 -->
-    <stroke android:color="#fff"
-        android:width="4dp"
+    <stroke android:color="#886e6e6e"
+        android:width="0dp"
         />
-    <gradient android:startColor="#19d6c4"
-        android:endColor="#19d6c4"/>
+    <gradient android:startColor="#886e6e6e"
+        android:endColor="#886e6e6e"/>
     <!-- 圆角的幅度 -->
     <corners android:radius="100dp"/>
 </shape>

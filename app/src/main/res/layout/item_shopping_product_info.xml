@@ -63,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingRight="30dp"
-                android:background="@drawable/c_c0c0_bg"
+                android:background="@drawable/c3_dot"
                 android:paddingTop="20dp"
                 android:paddingBottom="20dp">
                 <FrameLayout

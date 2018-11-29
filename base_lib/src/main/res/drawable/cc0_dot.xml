@@ -9,7 +9,7 @@
     <solid
         android:color="@color/white" />
     <!-- 边缘线条颜色 -->
-    <stroke android:color="#fff"
+    <stroke android:color="#19d6c4"
         android:width="4dp"
         />
     <gradient android:startColor="#19d6c4"

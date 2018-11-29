@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    >
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="473dp">
+        <ImageView
+            android:id="@+id/img"
+            android:src="@mipmap/girl"
+            android:layout_width="match_parent"
+            android:layout_height="473dp" />
+        <FrameLayout
+            android:background="@drawable/c3_dot"
+            android:layout_gravity="center"
+            android:layout_width="183dp"
+            android:layout_height="183dp">
+            <TextView
+                android:layout_gravity="center"
+                android:text="已售馨"
+                android:textSize="@dimen/text_size_46"
+                android:textColor="#fcfcfc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </FrameLayout>
+    </FrameLayout>
+        <TextView
+            android:id="@+id/title_name"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:lines="1"
+            android:textSize="@dimen/text_size_30"
+            android:textColor="@color/c333"
+            android:text="新西兰进口牛奶"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:padding="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+                    <TextView
+                        android:id="@+id/cptv"
+                        android:layout_alignParentBottom="true"
+                        android:text="团购价:¥ "
+                        android:textColor="#ff3600"
+                        android:textSize="@dimen/text_size_24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_toRightOf="@+id/cptv"
+                        android:layout_alignParentBottom="true"
+                        android:id="@+id/community_price"
+                        android:text="36.00"
+                        android:textSize="@dimen/text_size_42"
+                        android:textColor="#ff3600"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginRight="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="344dp"
+                        android:text="限购结束时间"
+                        android:textSize="22dp"
+                        android:textColor="@color/c999"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+                    <TextView
+                        android:id="@+id/ptv"
+                        android:layout_alignParentBottom="true"
+                        android:text="零售价:¥ "
+                        android:textColor="@color/c999"
+                        android:textSize="@dimen/text_size_24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_toRightOf="@+id/ptv"
+                        android:layout_alignParentBottom="true"
+                        android:id="@+id/price"
+                        android:text="36.00"
+                        android:textSize="@dimen/text_size_42"
+                        android:textColor="@color/c999"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/time"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginRight="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="344dp"
+                        android:text="2018.11.12 20:00:00"
+                        android:textSize="@dimen/text_size_24"
+                        android:textColor="@color/g05ca"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+</LinearLayout>
