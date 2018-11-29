@@ -19,7 +19,6 @@ class CallDialogView (context : Context, val message:String, val call:AppCompatD
         v?.iv_close?.onClick {   dialog?.cancel() }
         v?.btn_call?.onClick {
             call.invoke(dialog!!)
-
         }
     }
 }

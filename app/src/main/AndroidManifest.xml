@@ -54,6 +54,7 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity android:name=".module.home.ui.GoodDetailActivity"></activity>
+        <activity android:name=".module.home.ui.OrderAcivity"></activity>
         <activity
             android:name="com.zfdang.multiple_images_selector.ImagesSelectorActivity"
             android:configChanges="orientation|screenSize"/>

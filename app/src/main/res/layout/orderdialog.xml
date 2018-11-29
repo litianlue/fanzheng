@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_width="620dp"
+    android:layout_height="510dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="#fff8d8">
+
+        <ImageView
+            android:id="@+id/local_right"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_marginLeft="56dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical"
+            android:src="@mipmap/settlement_warning" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@+id/local_right"
+            android:gravity="center_vertical"
+            android:text="此商品需要您到团长处自提,请确认收获地址"
+            android:textColor="@color/ff36"
+            android:textSize="@dimen/text_size_26" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="181dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="74dp"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_gravity="center_horizontal"
+                android:src="@mipmap/settlement_location"
+                android:layout_width="28dp"
+                android:layout_height="28dp" />
+        </FrameLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="70dp">
+                <TextView
+                    android:text="提货地址:"
+                    android:textColor="@color/c666"
+                    android:textSize="@dimen/text_size_30"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:lines="2"
+                    android:text="广东省 白云区 白云大道 白云公园"
+                    android:textColor="@color/c333"
+                    android:textSize="@dimen/text_size_30"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="25dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="70dp">
+                <TextView
+                    android:text="团长:"
+                    android:textColor="@color/c666"
+                    android:textSize="@dimen/text_size_30"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:lines="2"
+                    android:text="张山  13800138000"
+                    android:textColor="@color/c333"
+                    android:textSize="@dimen/text_size_30"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        android:gravity="right"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+
+            android:text="商品金额:    "
+            android:textSize="@dimen/text_size_24"
+            android:textColor="@color/c999"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginRight="30dp"
+            android:text="￥36.00"
+            android:textSize="@dimen/text_size_30"
+            android:textColor="@color/ff36"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="91dp">
+            <TextView
+                android:id="@+id/cancle_tv"
+                android:gravity="center"
+                android:text="取消支付"
+                android:background="@color/white"
+                android:textColor="@color/c666"
+                android:textSize="@dimen/text_size_30"
+                android:layout_width="315dp"
+                android:layout_height="match_parent" />
+            <TextView
+                android:id="@+id/affirm_tv"
+                android:gravity="center"
+                android:text="确认支付"
+                android:background="@color/g05ca"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_30"
+                android:layout_width="315dp"
+                android:layout_height="match_parent" />
+            
+        </LinearLayout>
+        
+    </LinearLayout>
+</LinearLayout>

@@ -179,6 +179,7 @@
             
         </RelativeLayout>
         <TextView
+
             android:id="@+id/buy_tv"
             android:gravity="center"
             android:text="去结算"
