@@ -76,7 +76,8 @@
     </FrameLayout>
     <com.dyl.base_lib.external.BMPRecyclerView
         android:id="@+id/brv"
-        android:layout_width="match_parent"
+        android:layout_width="750dp"
+        android:minWidth="750dp"
         android:layout_height="wrap_content" />
 
 </LinearLayout>
