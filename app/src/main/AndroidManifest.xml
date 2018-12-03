@@ -179,6 +179,7 @@
         <activity android:name=".module.my.ui.HeadRecruitActivity"/>
         <activity android:name=".module.my.ui.HeadInfoActivity"/>
         <activity android:name=".module.my.ui.MyOrderActivity"/>
+        <activity android:name=".module.my.ui.OrderDetailsActivity"/>
 
     </application>
 
