@@ -31,6 +31,7 @@ class GoodDetailActivity : BaseActivity() {
         imgList.add("")
         initVp()
         initWB()
+
         go_home.onClick {
             startActivity<MainActivity>()
         }

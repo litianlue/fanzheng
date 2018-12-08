@@ -10,7 +10,6 @@ import org.jetbrains.anko.sdk25.coroutines.onClick
 
 class OrderAcivity:BaseActivity() {
     override fun initData() {
-
     }
     override fun initView() {
        setContentView(R.layout.orderacivity)

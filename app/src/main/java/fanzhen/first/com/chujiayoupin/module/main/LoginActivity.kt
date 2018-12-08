@@ -25,7 +25,7 @@ class LoginActivity : BaseActivity() {
 
         setContentView(R.layout.activity_login)
         login.onClick {
-            Log.w("test","isLogin====")
+
             loginWx()
         }
        // tv_hint.movementMethod = LinkMovementMethod.getInstance()

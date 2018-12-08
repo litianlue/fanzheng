@@ -25,12 +25,12 @@ inline fun MainActivity.initBottom(){
             iv_my.imageResource= R.mipmap.tab_icon_my_off
             tv_my.textColorResource= R.color.c9a9b
         }, {
-           // this@initBottom.checkLoginStartActivity<MainActivity> {
+            this@initBottom.checkLoginStartActivity<MainActivity> {
                 tv_my.textColorResource= R.color.g05ca
                 iv_my.imageResource= R.mipmap.tab_icon_my_on
                 this@initBottom.fl_content.removeAllViews()
                 this@initBottom.fl_content.addView(myView)
-          //  }
+            }
         })
     }.notifyAny(0)
 }

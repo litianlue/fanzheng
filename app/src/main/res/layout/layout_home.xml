@@ -22,7 +22,7 @@
         </FrameLayout>
         <TextView
             android:id="@+id/tab_layout"
-            android:layout_width="210dp"
+            android:layout_width="290dp"
             android:textSize="@dimen/text_size_36"
             android:gravity="center_vertical|center_horizontal"
             android:text="白云公园"

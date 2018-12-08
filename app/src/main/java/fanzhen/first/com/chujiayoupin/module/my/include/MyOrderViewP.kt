@@ -8,10 +8,7 @@ import com.first.chujiayoupin.model.SOrerDetails
 import com.ppx.kotlin.utils.inject.inflate
 import fanzhen.first.com.chujiayoupin.R
 import fanzhen.first.com.chujiayoupin.module.my.ui.MyOrderView
-import fanzhen.first.com.chujiayoupin.module.my.ui.OrderDetailsActivity
-import kotlinx.android.synthetic.main.item_order_info.view.*
 import kotlinx.android.synthetic.main.myview_order.view.*
-import org.jetbrains.anko.sdk25.coroutines.onClick
 
 fun MyOrderView.initOrderRcy() {
     v!!.rv_order.vertical()
@@ -30,7 +27,7 @@ fun MyOrderView.initOrderRcy() {
         }
 
         override fun onNotify(v: View, index: Int, data: String) {
-            v.order_details.onClick { startActivity<OrderDetailsActivity>() }
+
         }
 
 //        override fun getItemViewType(position: Int): Int {

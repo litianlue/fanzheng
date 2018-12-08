@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/order_details"
+    android:id="@+id/ll_order_details"
     android:layout_width="750dp"
     android:minWidth="750dp"
     android:minHeight="270dp"

@@ -53,6 +53,8 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+
+
         <activity android:name=".module.home.ui.GoodDetailActivity"></activity>
         <activity android:name=".module.home.ui.OrderAcivity"></activity>
         <activity
@@ -179,7 +181,6 @@
         <activity android:name=".module.my.ui.HeadRecruitActivity"/>
         <activity android:name=".module.my.ui.HeadInfoActivity"/>
         <activity android:name=".module.my.ui.MyOrderActivity"/>
-        <activity android:name=".module.my.ui.OrderDetailsActivity"/>
 
     </application>
 
