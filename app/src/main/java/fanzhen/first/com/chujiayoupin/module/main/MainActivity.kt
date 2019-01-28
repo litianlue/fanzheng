@@ -12,6 +12,7 @@ import org.greenrobot.eventbus.Subscribe
 
 
 class MainActivity : BaseActivity() {
+    //info
     val homeView by lazy {
         HomeView(this)
     }
